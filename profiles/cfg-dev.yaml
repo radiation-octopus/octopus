@@ -1,0 +1,10 @@
+octopus:
+
+  director:
+    name: mc_cao
+
+  udp:
+    port: 30000
+    binding:
+      method: Call
+      struct: main.MainUdp

@@ -1,0 +1,124 @@
+package udp
+
+import (
+	"fmt"
+	"net"
+	"octopus/core"
+	"octopus/utils"
+	"strconv"
+	"strings"
+	"time"
+)
+
+//Udp接受消息回调方法
+type UdpCallJob struct {
+	Ip   string
+	Port int
+	Msg  string
+	Time time.Time
+}
+
+//关闭
+func (c *UdpCallJob) Close() {
+
+}
+
+//执行方法
+func (c *UdpCallJob) Execute() {
+	if UdpAcceptCallBindingMethod == "" {
+		fmt.Println("CallJob Execute===>> ", c)
+	} else {
+		core.CallMethod(UdpAcceptCallBindingStruct, UdpAcceptCallBindingMethod, c)
+	}
+}
+
+type UdpMsg struct {
+	Ip   string
+	Port int
+	Msg  string
+}
+
+type OctopusUdp struct {
+	Port    int
+	listen  *net.UDPConn
+	pool    *utils.Pool
+	MsgChan chan *UdpMsg
+}
+
+func (u *OctopusUdp) Stop() {
+	u.listen.Close()
+}
+
+func (u *OctopusUdp) Start(Port int) {
+	u.Port = Port
+	//创建pool
+	u.pool = utils.NewPool(2)
+	u.pool.Start()
+	u.MsgChan = make(chan *UdpMsg, 1024)
+	var err error
+	u.listen, err = net.ListenUDP("udp", &net.UDPAddr{
+		IP:   net.IPv4(127, 0, 0, 1),
+		Port: Port,
+	})
+	if err != nil {
+		fmt.Printf("listen failed,err:%v\n", err)
+		return
+	}
+	u.accpectGoroutines()
+	u.sendGoroutines()
+}
+
+func (u *OctopusUdp) accpectGoroutines() {
+	go func() {
+		for {
+			var buf [1024]byte
+			n, addr, err := u.listen.ReadFromUDP(buf[:])
+			if err != nil {
+				//fmt.Printf("read udp failed,err:%v\n", err)
+				return
+			}
+			Msg := string(buf[:n])
+			callJob := new(UdpCallJob)
+			callJob.Ip = addr.IP.String()
+			callJob.Port = addr.Port
+			callJob.Msg = Msg
+			callJob.Time = time.Now()
+			u.pool.PutJobs(callJob)
+			//fmt.Printf("接收到的数据:%v\n", " addr:", addr, " str:", Msg)
+		}
+	}()
+}
+
+func (u *OctopusUdp) sendGoroutines() {
+	go func() {
+		for {
+			select {
+			case udpMsg := <-u.MsgChan:
+				buf := []byte(udpMsg.Msg)
+				Ips := strings.Split(udpMsg.Ip, ".")
+				a, _ := strconv.Atoi(Ips[0])
+				b, _ := strconv.Atoi(Ips[1])
+				c, _ := strconv.Atoi(Ips[2])
+				d, _ := strconv.Atoi(Ips[3])
+				addr := &net.UDPAddr{
+					IP:   net.IPv4(byte(a), byte(b), byte(c), byte(d)),
+					Port: udpMsg.Port,
+				}
+				_, err := u.listen.WriteToUDP(buf, addr)
+				if err != nil {
+					//fmt.Printf("write to %v failed,err:%v\n", addr, err)
+					return
+				}
+			}
+		}
+	}()
+}
+
+func (u *OctopusUdp) sendMsg(udpMsg *UdpMsg) {
+	u.MsgChan <- udpMsg
+}
+
+func (u *OctopusUdp) close() {
+	u.pool.Close()
+	close(u.MsgChan)
+}
