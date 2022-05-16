@@ -28,3 +28,17 @@ type MainUdp struct {
 func (udp *MainUdp) Call(in interface{}) {
 	fmt.Println("MainUdp=======> ", in)
 }
+
+type MainTcpClinet struct {
+}
+
+func (tcp *MainTcpClinet) Call(in interface{}) {
+	fmt.Println("MainTcpClinet=======> ", in)
+}
+
+type MainTcpServer struct {
+}
+
+func (tcp *MainTcpServer) Call(in interface{}) {
+	fmt.Println("MainTcpServer=======> ", in)
+}

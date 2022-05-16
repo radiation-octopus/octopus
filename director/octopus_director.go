@@ -64,8 +64,8 @@ func (d *OctopusDirector) directorStop() {
 
 }
 
-func (d *OctopusDirector) setProfilesCfgPath(ProfilesCfgPath []string) {
-	d.ProfilesCfgPath = ProfilesCfgPath
+func (d *OctopusDirector) setProfilesCfgPath(ProfilesCfgPath string) {
+	d.ProfilesCfgPath = append(d.ProfilesCfgPath, ProfilesCfgPath)
 }
 
 func (d *OctopusDirector) setProfilesCfgPrefix(ProfilesCfgPrefix string) {

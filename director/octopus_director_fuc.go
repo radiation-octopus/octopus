@@ -29,19 +29,19 @@ func Stop() {
 }
 
 //配置文件路径
-func SetProfilesCfgPath(cfgLocationPath ...string) {
+func SetProfilesCfgPath(cfgLocationPath string) {
 	getInstance().setProfilesCfgPath(cfgLocationPath)
 }
 
-//配置文件前缀
-func SetProfilesCfgPrefix(profilesCfgPrefix string) {
-	getInstance().setProfilesCfgPrefix(profilesCfgPrefix)
-}
-
-//配置文件后缀
-func SetProfilesCfgType(profilesCfgType string) {
-	getInstance().setProfilesCfgType(profilesCfgType)
-}
+////配置文件前缀
+//func SetProfilesCfgPrefix(profilesCfgPrefix string) {
+//	getInstance().setProfilesCfgPrefix(profilesCfgPrefix)
+//}
+//
+////配置文件后缀
+//func SetProfilesCfgType(profilesCfgType string) {
+//	getInstance().setProfilesCfgType(profilesCfgType)
+//}
 
 func loadProfilesCfgPathes(profilesCfgPathes []string, profilesCfgPrefix string, profilesCfgType string) map[interface{}]interface{} {
 	var cfg map[interface{}]interface{}

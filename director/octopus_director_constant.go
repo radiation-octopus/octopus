@@ -19,3 +19,6 @@ const ProfilesCfgDefaultKey2 = "cfg"
 
 //默认读配置文件
 const ProfilesCfgDefaultKey3 = "active"
+
+//默认读Bananer存放地址
+const ProfilesBananerFileName = "bananer.text"

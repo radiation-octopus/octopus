@@ -20,7 +20,11 @@ func SendMsg(udpMsg *UdpMsg) {
 	getInstance().sendMsg(udpMsg)
 }
 
-//
-//func UdpAcceptCallBinding(method string){
-//	UdpAcceptCallBindingMethod=method
-//}
+func Start() {
+	getInstance().start()
+}
+
+func Stop() {
+	getInstance().close()
+	octopusUdp = nil
+}

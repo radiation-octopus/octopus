@@ -1,10 +1,32 @@
 octopus:
 
   director:
-    name: mc_cao
+    name: RadiationOctopus
+    bananer:
+      url: bananer.text
 
   udp:
     port: 30000
+    msg:
+      num: 1024
     binding:
+      pool:
+        num: 2
       method: Call
       struct: main.MainUdp
+
+  tcp:
+    clinet:
+      msg:
+        num: 1024
+      port: 20001
+      binding:
+        method: Call
+        struct: main.MainTcpClinet
+    server:
+      port: 20000
+      binding:
+        pool:
+          num: 2
+        method: Call
+        struct: main.MainTcpServer

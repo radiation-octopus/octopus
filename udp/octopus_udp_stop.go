@@ -7,6 +7,6 @@ type UdpStop struct {
 }
 
 func (d *UdpStart) Stop() {
-	getInstance().Stop()
+	Stop()
 	fmt.Println("UdpStop stop")
 }

@@ -39,26 +39,26 @@ type UdpMsg struct {
 }
 
 type OctopusUdp struct {
-	Port    int
-	listen  *net.UDPConn
-	pool    *utils.Pool
-	MsgChan chan *UdpMsg
+	Port       int
+	listen     *net.UDPConn
+	pool       *utils.Pool
+	UdpMsgChan chan *UdpMsg
 }
 
-func (u *OctopusUdp) Stop() {
+func (u *OctopusUdp) stop() {
 	u.listen.Close()
 }
 
-func (u *OctopusUdp) Start(Port int) {
-	u.Port = Port
+func (u *OctopusUdp) start() {
+	u.Port = UdpPort
 	//创建pool
-	u.pool = utils.NewPool(2)
+	u.pool = utils.NewPool(UdpAcceptCallBindingPoolNum)
 	u.pool.Start()
-	u.MsgChan = make(chan *UdpMsg, 1024)
+	u.UdpMsgChan = make(chan *UdpMsg, UdpMsgNum)
 	var err error
 	u.listen, err = net.ListenUDP("udp", &net.UDPAddr{
 		IP:   net.IPv4(127, 0, 0, 1),
-		Port: Port,
+		Port: u.Port,
 	})
 	if err != nil {
 		fmt.Printf("listen failed,err:%v\n", err)
@@ -93,7 +93,7 @@ func (u *OctopusUdp) sendGoroutines() {
 	go func() {
 		for {
 			select {
-			case udpMsg := <-u.MsgChan:
+			case udpMsg := <-u.UdpMsgChan:
 				buf := []byte(udpMsg.Msg)
 				Ips := strings.Split(udpMsg.Ip, ".")
 				a, _ := strconv.Atoi(Ips[0])
@@ -115,10 +115,10 @@ func (u *OctopusUdp) sendGoroutines() {
 }
 
 func (u *OctopusUdp) sendMsg(udpMsg *UdpMsg) {
-	u.MsgChan <- udpMsg
+	u.UdpMsgChan <- udpMsg
 }
 
 func (u *OctopusUdp) close() {
 	u.pool.Close()
-	close(u.MsgChan)
+	close(u.UdpMsgChan)
 }
