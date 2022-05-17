@@ -18,5 +18,10 @@
 *.iml
 *.ipr
 
+
+####日志
+logs
+logs/*
+#*.log
 # Dependency directories (remove the comment below to include it)
 # vendor/

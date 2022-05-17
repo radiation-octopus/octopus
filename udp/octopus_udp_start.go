@@ -1,6 +1,6 @@
 package udp
 
-import "fmt"
+import "octopus/log"
 
 //Udp启动方法
 type UdpStart struct {
@@ -18,5 +18,5 @@ func (u *UdpStart) Start() {
 	UdpAcceptCallBindingStruct = "*" + u.BindingStruct
 	UdpAcceptCallBindingPoolNum = u.BindingPoolNum
 	Start()
-	fmt.Println("UdpStart start")
+	log.Info("UdpStart start")
 }

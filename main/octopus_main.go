@@ -1,9 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"octopus/core"
 	"octopus/director"
+	"octopus/log"
+	_ "octopus/log"
 	_ "octopus/tcp"
 	_ "octopus/udp"
 )
@@ -24,6 +25,6 @@ func init() {
 func main() {
 	director.Start()
 	var testMainDao = core.GetLang("main.MainDao").(*MainDao)
-	testMainService := core.GetLang("main.MainService").(*MainService)
-	fmt.Println(testMainDao, testMainService)
+	var testMainService = core.GetLang("main.MainService").(*MainService)
+	log.Info(testMainDao, testMainService)
 }

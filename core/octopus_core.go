@@ -1,7 +1,6 @@
 package core
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 )
@@ -54,20 +53,20 @@ func (c *OctopusCore) dependenceInject() {
 			if tag.Get(autoInjectLang) != "" {
 				attribute := OctopusLang["*"+tag.Get(autoInjectLang)]
 				field.Set(reflect.ValueOf(*attribute))
-				fmt.Println(field)
+				//fmt.Println(field)
 				//依赖Lang
 			} else if tag.Get(autoRelyonLang) != "" {
 				autoRelyonLangs = append(autoRelyonLangs, "*"+tag.Get(autoRelyonLang))
 				attribute := OctopusLang["*"+tag.Get(autoRelyonLang)]
 				field.Set(reflect.ValueOf(*attribute))
-				fmt.Println(field)
+				//fmt.Println(field)
 				//配置文件yaml
 			} else if tag.Get(autoInjectCfg) != "" {
 				strs := strings.Split(tag.Get(autoInjectCfg), ".")
 				long := c.readCfg(strs)
 				attribute := reflect.ValueOf(long)
 				field.Set(attribute)
-				fmt.Println(field)
+				//fmt.Println(field)
 			}
 		}
 		startMethod := valueOf.MethodByName(startMethodName)
@@ -122,21 +121,21 @@ func (c *OctopusCore) longsByStopMethod() map[string][]string {
 func (c *OctopusCore) CallMethod(name string, methodName string, in []interface{}) {
 	octopusLang := c.OctopusLang[name]
 	valueOf := reflect.ValueOf(*octopusLang)
-	fmt.Println("valueOf====> ", valueOf)
+	//fmt.Println("valueOf====> ", valueOf)
 	method := valueOf.MethodByName(methodName)
 	if in == nil || len(in) == 0 || in[0] == nil {
 		method.Call(nil)
-		fmt.Println(method)
+		//fmt.Println(method)
 	} else {
 		values := make([]reflect.Value, len(in))
 		for i := range in {
 			val := in[i]
 			value := reflect.ValueOf(val)
-			fmt.Println("value====> ", value)
+			//fmt.Println("value====> ", value)
 			values[i] = value
 		}
 
 		method.Call(values)
-		fmt.Println(method)
+		//fmt.Println(method)
 	}
 }

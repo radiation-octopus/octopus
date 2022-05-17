@@ -1,6 +1,8 @@
 package tcp
 
-import "fmt"
+import (
+	"octopus/log"
+)
 
 //Tcp停止方法
 type TcpStop struct {
@@ -8,5 +10,5 @@ type TcpStop struct {
 
 func (t *TcpStart) Stop() {
 	Stop()
-	fmt.Println("TcpStop stop")
+	log.Info("TcpStop stop")
 }

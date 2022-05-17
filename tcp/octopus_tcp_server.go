@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"octopus/core"
+	"octopus/log"
 	"octopus/utils"
 	"strconv"
 	"strings"
@@ -31,7 +32,7 @@ func (c *ServerTcpCallJob) Execute() {
 	reader := bufio.NewReader(conn)
 	var buf [1024]byte
 	n, _ := reader.Read(buf[:]) // 读取数据
-	fmt.Println(conn.RemoteAddr().String())
+	log.Info(conn.RemoteAddr().String())
 	host := strings.Split(conn.RemoteAddr().String(), ":")
 	Msg := string(buf[:n])
 
@@ -40,10 +41,10 @@ func (c *ServerTcpCallJob) Execute() {
 	c.Port, _ = strconv.Atoi(host[1])
 	c.Time = time.Now()
 	//不用线程池 因为面向链接
-	if TcpServerTcpAcceptCallBindingMethod == "" {
-		fmt.Println("CallJob Execute===>> ", c)
+	if TcpServerAcceptCallBindingMethod == "" {
+		log.Info("CallJob Execute===>> ", c)
 	} else {
-		core.CallMethod(TcpServerTcpAcceptCallBindingStruct, TcpServerTcpAcceptCallBindingMethod, c)
+		core.CallMethod(TcpServerAcceptCallBindingStruct, TcpServerAcceptCallBindingMethod, c)
 	}
 	conn.Close()
 }
@@ -61,7 +62,7 @@ func (t *OctopusServerTcp) stop() {
 func (t *OctopusServerTcp) start() {
 	t.TcpServerPort = TcpServerPort
 	//创建pool
-	t.pool = utils.NewPool(TcpServerBindingPoolNum)
+	t.pool = utils.NewPool(TcpServerAcceptCallBindingPoolNum)
 	t.pool.Start()
 	//t.TcpMsgChan = make(chan *TcpMsg, 1024)
 	var err error

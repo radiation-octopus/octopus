@@ -6,13 +6,13 @@ package tcp
 var TcpServerPort int
 
 //Server 回调线程数量
-var TcpServerBindingPoolNum int
+var TcpServerAcceptCallBindingPoolNum int
 
 //Server tcp接受回调方法
-var TcpServerTcpAcceptCallBindingMethod string
+var TcpServerAcceptCallBindingMethod string
 
 //Server tcp接受回调注入体
-var TcpServerTcpAcceptCallBindingStruct string
+var TcpServerAcceptCallBindingStruct string
 
 //Clinet 端口
 var TcpClinetPort int
@@ -21,7 +21,7 @@ var TcpClinetPort int
 var TcpClinetMsgNum int
 
 //Clinet tcp接受回调方法
-var TcpClinetTcpAcceptCallBindingMethod string
+var TcpClinetAcceptCallBindingMethod string
 
 //Clinet tcp接受回调注入体
-var TcpClinetTcpAcceptCallBindingStruct string
+var TcpClinetAcceptCallBindingStruct string

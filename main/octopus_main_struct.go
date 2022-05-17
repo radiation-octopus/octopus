@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"octopus/log"
 )
 
 type MainService struct {
@@ -10,7 +10,7 @@ type MainService struct {
 }
 
 func (my *MainService) AddMain() {
-	fmt.Println("MainService.AddMain()")
+	log.Info("MainService.AddMain()")
 	my.MainDao.AddMain()
 }
 
@@ -19,26 +19,54 @@ type MainDao struct {
 }
 
 func (my *MainDao) AddMain() {
-	fmt.Println("MainDao.AddMain()")
+	log.Info("MainDao.AddMain()")
 }
 
 type MainUdp struct {
 }
 
 func (udp *MainUdp) Call(in interface{}) {
-	fmt.Println("MainUdp=======> ", in)
+	log.Info("MainUdp=======> ", in)
 }
 
 type MainTcpClinet struct {
 }
 
 func (tcp *MainTcpClinet) Call(in interface{}) {
-	fmt.Println("MainTcpClinet=======> ", in)
+	log.Info("MainTcpClinet=======> ", in)
 }
 
 type MainTcpServer struct {
 }
 
 func (tcp *MainTcpServer) Call(in interface{}) {
-	fmt.Println("MainTcpServer=======> ", in)
+	log.Info("MainTcpServer=======> ", in)
+}
+
+type MainLogDebugServer struct {
+}
+
+func (tcp *MainLogDebugServer) Call(in interface{}) {
+	log.Info("MainLogDebugServer=======> ", in)
+}
+
+type MainLogInfoServer struct {
+}
+
+func (tcp *MainLogInfoServer) Call(in interface{}) {
+	log.Info("MainLogInfoServer=======> ", in)
+}
+
+type MainLogWarnServer struct {
+}
+
+func (tcp *MainLogWarnServer) Call(in interface{}) {
+	log.Info("MainLogWarnServer=======> ", in)
+}
+
+type MainLogErrorServer struct {
+}
+
+func (tcp *MainLogErrorServer) Call(in interface{}) {
+	log.Info("MainLogErrorServer=======> ", in)
 }

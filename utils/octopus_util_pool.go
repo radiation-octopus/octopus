@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"sync"
 )
 
@@ -33,7 +32,7 @@ func (p *Pool) Start() {
 			case job := <-p.jobsChan:
 				jobs := *job
 				go jobs.Execute()
-				fmt.Println("received", job)
+				//fmt.Println("received", job)
 			}
 		}
 	}()

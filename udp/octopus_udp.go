@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"octopus/core"
+	"octopus/log"
 	"octopus/utils"
 	"strconv"
 	"strings"
@@ -26,7 +27,7 @@ func (c *UdpCallJob) Close() {
 //执行方法
 func (c *UdpCallJob) Execute() {
 	if UdpAcceptCallBindingMethod == "" {
-		fmt.Println("CallJob Execute===>> ", c)
+		log.Info("CallJob Execute===>> ", c)
 	} else {
 		core.CallMethod(UdpAcceptCallBindingStruct, UdpAcceptCallBindingMethod, c)
 	}

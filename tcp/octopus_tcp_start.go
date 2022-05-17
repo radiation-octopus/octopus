@@ -1,6 +1,6 @@
 package tcp
 
-import "fmt"
+import "octopus/log"
 
 //Tcp启动方法
 type TcpStart struct {
@@ -17,12 +17,12 @@ type TcpStart struct {
 func (t *TcpStart) Start() {
 	TcpClinetMsgNum = t.ClinetMsgNum
 	TcpServerPort = t.ServerPort
-	TcpServerBindingPoolNum = t.ServerBindingPoolNum
-	TcpServerTcpAcceptCallBindingMethod = t.ServerBindingMethod
-	TcpServerTcpAcceptCallBindingStruct = "*" + t.ServerBindingStruct
+	TcpServerAcceptCallBindingPoolNum = t.ServerBindingPoolNum
+	TcpServerAcceptCallBindingMethod = t.ServerBindingMethod
+	TcpServerAcceptCallBindingStruct = "*" + t.ServerBindingStruct
 	TcpClinetPort = t.ClinetPort
-	TcpClinetTcpAcceptCallBindingMethod = t.ClinetBindingMethod
-	TcpClinetTcpAcceptCallBindingStruct = "*" + t.ClinetBindingStruct
+	TcpClinetAcceptCallBindingMethod = t.ClinetBindingMethod
+	TcpClinetAcceptCallBindingStruct = "*" + t.ClinetBindingStruct
 	Start()
-	fmt.Println("TcpStart start")
+	log.Info("TcpStart start")
 }

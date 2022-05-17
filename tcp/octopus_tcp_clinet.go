@@ -1,9 +1,9 @@
 package tcp
 
 import (
-	"fmt"
 	"net"
 	"octopus/core"
+	"octopus/log"
 	"strconv"
 	"time"
 )
@@ -38,12 +38,12 @@ func (t *OctopusClinetTcp) sendGoroutines() {
 				conn.Write(buf)
 				n, _ := conn.Read(buf[:])
 				if n != 0 {
-					fmt.Println(string(buf[:n]))
+					log.Info(string(buf[:n]))
 					//发送消息后接受消息回调
 					callJob := new(ClinetTcpCallJob)
 					callJob.TcpMsg = tcpMsg
 					callJob.Time = time.Now()
-					core.CallMethod(TcpClinetTcpAcceptCallBindingStruct, TcpClinetTcpAcceptCallBindingMethod, callJob)
+					core.CallMethod(TcpClinetAcceptCallBindingStruct, TcpClinetAcceptCallBindingMethod, callJob)
 					conn.Close()
 				}
 			}

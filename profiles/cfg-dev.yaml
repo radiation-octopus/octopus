@@ -30,3 +30,30 @@ octopus:
           num: 2
         method: Call
         struct: main.MainTcpServer
+
+  log:
+    save:
+      is: true
+      path: logs
+      cut:
+        is: true
+        time: day
+        max: 30
+    console:
+      level: debug
+    msg:
+      num: 1024
+    time:
+      format: 2006-01-02 15:04:05 500
+    debug:
+      color: cyan
+      file: debug.log
+    info:
+      color: blue
+      file: info.log
+    warn:
+      color: yellow
+      file: warn.log
+    error:
+      color: red
+      file: error.log

@@ -1,6 +1,8 @@
 package udp
 
-import "fmt"
+import (
+	"octopus/log"
+)
 
 //Udp停止方法
 type UdpStop struct {
@@ -8,5 +10,5 @@ type UdpStop struct {
 
 func (d *UdpStart) Stop() {
 	Stop()
-	fmt.Println("UdpStop stop")
+	log.Info("UdpStop stop")
 }

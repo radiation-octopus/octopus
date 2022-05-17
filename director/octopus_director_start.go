@@ -17,9 +17,9 @@ func (d *DirectorStart) Start() {
 	} else {
 		bananerPath = ProfilesCfgPath + "/" + bananerPath
 	}
-	strs := utils.ReadFile(bananerPath)
+	strs := utils.ReadFileLine(bananerPath)
 	for _, str := range strs {
 		fmt.Println(str)
 	}
-	fmt.Println("DirectorStart start")
+	//fmt.Println("DirectorStart start")
 }

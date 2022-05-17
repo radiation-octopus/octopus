@@ -1,7 +1,6 @@
 package director
 
 import (
-	"fmt"
 	"octopus/core"
 	"reflect"
 	"strings"
@@ -40,7 +39,7 @@ func (d *OctopusDirector) directorStart() {
 	startOctopusLang := core.GetStartOctopusLang()
 	d.startOctopusLangOrder = FindDeepOrders(startOctopusLang)
 	//调用顺序stop
-	fmt.Println("Start !!!")
+	//fmt.Println("Start !!!")
 	//调用顺序start
 	for i := range d.startOctopusLangOrder {
 		core.CallStartByName(d.startOctopusLangOrder[i])
@@ -57,7 +56,7 @@ func (d *OctopusDirector) directorStop() {
 	stopOctopusLang := core.GetStopOctopusLang()
 	d.stopOctopusLangOrder = FindDeepOrders(stopOctopusLang)
 	//调用顺序stop
-	fmt.Println("Stop !!!")
+	//fmt.Println("Stop !!!")
 	for i := range d.stopOctopusLangOrder {
 		core.CallStopByName(d.stopOctopusLangOrder[i])
 	}
