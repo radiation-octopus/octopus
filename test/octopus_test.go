@@ -77,8 +77,8 @@ func TestDb(t *testing.T) {
 	u.Age = 18
 	u.Sex = "男"
 
-	db.Insert(db.P2pHostMark, "0001", &u)
-	user2 := db.Query(db.P2pHostMark, "0001", &u).(*User)
+	db.Insert("0201", "0001", &u)
+	user2 := db.Query("0201", "0001", &u).(*User)
 	fmt.Println(user2)
 }
 

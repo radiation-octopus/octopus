@@ -17,7 +17,7 @@ const (
 //blockchain结构体
 type BlockChain struct {
 	db            db.Database //数据库
-	txLookupLimit uint64      `autoInjectCfg:"octopus.block.binding.txLookupLimit"` //一个区块容纳最大交易限制
+	txLookupLimit uint64      //`autoInjectCfg:"octopus.block.binding.txLookupLimit"` //一个区块容纳最大交易限制
 	blockProcFeed Feed        //区块过程注入事件
 	genesisBlock  *Block
 
@@ -112,7 +112,7 @@ func (bc *BlockChain) updateFutureBlocks() {
 }
 
 func (bc *BlockChain) procFutureBlocks() {
-	fmt.Println("新增区块：")
+	//fmt.Println("新增区块：")
 	blocks := make([]*Block, 0, bc.futureBlocks.Len())
 	for _, hash := range bc.futureBlocks.Keys() {
 		if block, exist := bc.futureBlocks.Peek(hash); exist {
