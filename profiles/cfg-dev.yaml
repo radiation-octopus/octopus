@@ -62,6 +62,12 @@ octopus:
     save:
       path: data/octopus.db
 
+  cache:
+    auto:
+      create:
+        is: true
+        num: 1
+
   #  链初始配置
   blockchain:
     binding:
