@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func GetInterfaceToString(value interface{}) string {
+func GetInToStr(value interface{}) string {
 	// interface 转 string
 	var key string
 	if value == nil {

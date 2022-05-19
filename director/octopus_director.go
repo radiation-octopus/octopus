@@ -54,7 +54,7 @@ func (d *OctopusDirector) directorStart() {
 func (d *OctopusDirector) directorStop() {
 	//获得core stop注入
 	stopOctopusLang := core.GetStopOctopusLang()
-	d.stopOctopusLangOrder = FindDeepOrders(stopOctopusLang)
+	d.stopOctopusLangOrder = FindHeadOrders(stopOctopusLang)
 	//调用顺序stop
 	//fmt.Println("Stop !!!")
 	for i := range d.stopOctopusLangOrder {

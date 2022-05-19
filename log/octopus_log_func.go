@@ -46,21 +46,21 @@ func Stop() {
 }
 
 func Debug(in ...interface{}) {
-	str := utils.GetInterfaceToString(in)
+	str := utils.GetInToStr(in)
 	CreateLogMsg(DebugLevel, str)
 }
 
 func Info(in ...interface{}) {
-	str := utils.GetInterfaceToString(in)
+	str := utils.GetInToStr(in)
 	CreateLogMsg(InfoLevel, str)
 }
 
 func Warn(in ...interface{}) {
-	str := utils.GetInterfaceToString(in)
+	str := utils.GetInToStr(in)
 	CreateLogMsg(WarnLevel, str)
 }
 
 func Error(in ...interface{}) {
-	str := utils.GetInterfaceToString(in)
+	str := utils.GetInToStr(in)
 	CreateLogMsg(ErrorLevel, str)
 }

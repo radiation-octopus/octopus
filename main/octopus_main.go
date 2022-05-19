@@ -3,6 +3,7 @@ package main
 import (
 	_ "octopus/blockchain"
 	"octopus/core"
+	_ "octopus/db"
 	"octopus/director"
 	"octopus/log"
 	_ "octopus/log"
@@ -13,14 +14,8 @@ import (
 func init() {
 	mainDao := new(MainDao)
 	mainService := new(MainService)
-	mainUdp := new(MainUdp)
-	mainTcpServer := new(MainTcpServer)
-	mainTcpClinet := new(MainTcpClinet)
 	director.Register(mainDao)
 	director.Register(mainService)
-	director.Register(mainUdp)
-	director.Register(mainTcpServer)
-	director.Register(mainTcpClinet)
 }
 
 func main() {

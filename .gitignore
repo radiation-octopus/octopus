@@ -23,6 +23,10 @@
 logs
 logs/*
 
+####数据卷
+data
+data/*
+
 ###go sum
 go.sum
 #*.log
