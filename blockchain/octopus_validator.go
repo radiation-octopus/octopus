@@ -1,6 +1,7 @@
 package blockchain
 
 import (
+	"octopus/block"
 	"octopus/consensus"
 )
 
@@ -22,11 +23,11 @@ func NewBlockValidator(blockchain *BlockChain, engine consensus.Engine) *BlockVa
 //定义验证器处理接口
 type Validator interface {
 	//验证给定块内容
-	validateBody(block *Block) error
+	validateBody(block *block.Block) error
 }
 
 //区块验证具体实现
-func (v *BlockValidator) validateBody(block *Block) error {
+func (v *BlockValidator) validateBody(block *block.Block) error {
 
 	return nil
 }

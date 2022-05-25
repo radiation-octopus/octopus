@@ -1,10 +1,12 @@
 package blockchain
 
-//初始交易数量限制
-var TxLookupLimit uint64
+var (
+	//初始交易数量限制
+	TxLookupLimit uint64
 
-//blockchain 主方法
-var BindingMethod string
+	//blockchain 主方法
+	BindingMethod string
 
-//blockchain 结构体
-var BindingStruct string
+	//blockchain 结构体
+	BindingStruct string
+)

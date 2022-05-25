@@ -5,6 +5,8 @@ import (
 	"math"
 	"math/big"
 	mrand "math/rand"
+	"octopus/block"
+	"octopus/utils"
 )
 
 type ChainReader interface {
@@ -12,7 +14,7 @@ type ChainReader interface {
 	//Config() *params.ChainConfig
 
 	// 返回本地块总难度
-	GetTd(Hash, uint64) *big.Int
+	GetTd(utils.Hash, uint64) *big.Int
 }
 
 type ForkChoice struct {
@@ -23,10 +25,10 @@ type ForkChoice struct {
 	// Miners will prefer to choose the local mined block if the
 	// local td is equal to the extern one. It can be nil for light
 	// client
-	preserve func(header *Header) bool
+	preserve func(header *block.Header) bool
 }
 
-func NewForkChoice(chainReader ChainReader, preserve func(header *Header) bool) *ForkChoice {
+func NewForkChoice(chainReader ChainReader, preserve func(header *block.Header) bool) *ForkChoice {
 	// Seed a fast but crypto originating random generator
 	seed, err := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))
 	if err != nil {
