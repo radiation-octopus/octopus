@@ -118,7 +118,8 @@ func (c *OctopusCore) longsByStopMethod() map[string][]string {
 	return c.stopOctopusLang
 }
 
-func (c *OctopusCore) CallMethod(name string, methodName string, in []interface{}) {
+func (c *OctopusCore) CallMethod(name string, methodName string, in []interface{}) []interface{} {
+	outInterface := []interface{}{}
 	octopusLang := c.OctopusLang[name]
 	valueOf := reflect.ValueOf(*octopusLang)
 	//fmt.Println("valueOf====> ", valueOf)
@@ -135,7 +136,11 @@ func (c *OctopusCore) CallMethod(name string, methodName string, in []interface{
 			values[i] = value
 		}
 
-		method.Call(values)
+		callValues := method.Call(values)
+		for i, c := range callValues {
+			outInterface[i] = c.Interface()
+		}
 		//fmt.Println(method)
 	}
+	return outInterface
 }

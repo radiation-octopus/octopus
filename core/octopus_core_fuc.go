@@ -63,6 +63,6 @@ func CallStopByName(name string) {
 	getInstance().CallMethod(name, stopMethodName, nil)
 }
 
-func CallMethod(name string, methodName string, in ...interface{}) {
-	getInstance().CallMethod(name, methodName, in)
+func CallMethod(name string, methodName string, in ...interface{}) []interface{} {
+	return getInstance().CallMethod(name, methodName, in)
 }
