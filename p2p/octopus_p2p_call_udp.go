@@ -50,6 +50,7 @@ func heartCall(ip string, udpPort int, heartTime time.Time, msg HeartMsg) {
 
 func updateHeartState(in *Instance) {
 	switch in.State {
+
 	case HeartStatePending:
 
 	case HeartStateAvailable:

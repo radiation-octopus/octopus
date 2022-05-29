@@ -50,19 +50,19 @@ func (c *OctopusCore) dependenceInject() {
 			field := valueOfElem.Field(i)
 			tag := typeOfElem.Field(i).Tag
 			//注入Lang
-			if tag.Get(autoInjectLang) != "" {
-				attribute := OctopusLang["*"+tag.Get(autoInjectLang)]
+			if tag.Get(autoInjectLangTag) != "" {
+				attribute := OctopusLang["*"+tag.Get(autoInjectLangTag)]
 				field.Set(reflect.ValueOf(*attribute))
 				//fmt.Println(field)
 				//依赖Lang
-			} else if tag.Get(autoRelyonLang) != "" {
-				autoRelyonLangs = append(autoRelyonLangs, "*"+tag.Get(autoRelyonLang))
-				attribute := OctopusLang["*"+tag.Get(autoRelyonLang)]
+			} else if tag.Get(autoRelyonLangTag) != "" {
+				autoRelyonLangs = append(autoRelyonLangs, "*"+tag.Get(autoRelyonLangTag))
+				attribute := OctopusLang["*"+tag.Get(autoRelyonLangTag)]
 				field.Set(reflect.ValueOf(*attribute))
 				//fmt.Println(field)
 				//配置文件yaml
-			} else if tag.Get(autoInjectCfg) != "" {
-				strs := strings.Split(tag.Get(autoInjectCfg), ".")
+			} else if tag.Get(autoInjectCfgTag) != "" {
+				strs := strings.Split(tag.Get(autoInjectCfgTag), ".")
 				long := c.readCfg(strs)
 				attribute := reflect.ValueOf(long)
 				field.Set(attribute)

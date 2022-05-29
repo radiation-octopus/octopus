@@ -3,13 +3,13 @@ package core
 //存放默认常量
 
 //自动注入实例
-const autoInjectLang = "autoInjectLang"
+const autoInjectLangTag = "autoInjectLang"
 
 //自动依赖实例
-const autoRelyonLang = "autoRelyonLang"
+const autoRelyonLangTag = "autoRelyonLang"
 
 //自动注入配置
-const autoInjectCfg = "autoInjectCfg"
+const autoInjectCfgTag = "autoInjectCfg"
 
 //注册方法启动
 const startMethodName = "Start"

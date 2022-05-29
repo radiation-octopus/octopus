@@ -31,6 +31,27 @@ octopus:
         method: Call
         struct: p2p.P2pCallTcpServer
 
+  api:
+    session:
+      is: true
+      maxAge: 1800
+      cookie:
+        path: /
+        website: 127.0.0.1
+    cookie:
+      is: true
+      maxAge: 1800
+      path: /
+      website: 127.0.0.1
+    handle:
+      pool:
+        num: 1024
+    pathVariable:
+      prefix: \$
+    method:
+      prefix: \*
+
+
   log:
     save:
       is: true
@@ -44,7 +65,7 @@ octopus:
     msg:
       num: 1024
     time:
-      format: 2006-01-02 15:04:05 500
+      format: 2006-01-02 15:04:05 0500
     debug:
       color: cyan
       file: debug.log

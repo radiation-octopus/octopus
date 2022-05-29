@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "octopus/api"
 	_ "octopus/blockchain"
 	"octopus/core"
 	_ "octopus/db"
