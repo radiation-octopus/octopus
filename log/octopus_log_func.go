@@ -1,7 +1,7 @@
 package log
 
 import (
-	"octopus/utils"
+	"github.com/radiation-octopus/octopus/utils"
 	"path"
 	"runtime"
 	"strconv"

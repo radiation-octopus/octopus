@@ -1,6 +1,6 @@
 package api
 
-import "octopus/log"
+import "github.com/radiation-octopus/octopus/log"
 
 //Web停止方法
 type WebStop struct {

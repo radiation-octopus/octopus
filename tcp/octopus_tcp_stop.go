@@ -1,7 +1,7 @@
 package tcp
 
 import (
-	"octopus/log"
+	"github.com/radiation-octopus/octopus/log"
 )
 
 //Tcp停止方法

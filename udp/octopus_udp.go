@@ -2,10 +2,10 @@ package udp
 
 import (
 	"fmt"
+	"github.com/radiation-octopus/octopus/core"
+	"github.com/radiation-octopus/octopus/log"
+	"github.com/radiation-octopus/octopus/utils"
 	"net"
-	"octopus/core"
-	"octopus/log"
-	"octopus/utils"
 	"strconv"
 	"strings"
 	"time"

@@ -2,12 +2,12 @@ package test
 
 import (
 	"fmt"
+	"github.com/radiation-octopus/octopus/db"
+	"github.com/radiation-octopus/octopus/director"
+	"github.com/radiation-octopus/octopus/tcp"
+	"github.com/radiation-octopus/octopus/udp"
 	uuid "github.com/satori/go.uuid"
 	"math/rand"
-	"octopus/db"
-	"octopus/director"
-	"octopus/tcp"
-	"octopus/udp"
 	"strconv"
 	"strings"
 	"testing"

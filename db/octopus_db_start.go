@@ -1,6 +1,6 @@
 package db
 
-import "octopus/log"
+import "github.com/radiation-octopus/octopus/log"
 
 //Db启动方法
 type DbStart struct {

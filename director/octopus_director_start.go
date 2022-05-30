@@ -2,7 +2,7 @@ package director
 
 import (
 	"fmt"
-	"octopus/utils"
+	"github.com/radiation-octopus/octopus/utils"
 )
 
 //DirectorStart

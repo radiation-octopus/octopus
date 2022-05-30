@@ -1,6 +1,6 @@
 package cache
 
-import "octopus/director"
+import "github.com/radiation-octopus/octopus/director"
 
 //初始化octopus
 func init() {

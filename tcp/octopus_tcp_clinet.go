@@ -1,9 +1,9 @@
 package tcp
 
 import (
+	"github.com/radiation-octopus/octopus/core"
+	"github.com/radiation-octopus/octopus/log"
 	"net"
-	"octopus/core"
-	"octopus/log"
 	"strconv"
 	"time"
 )

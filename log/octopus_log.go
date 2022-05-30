@@ -2,7 +2,7 @@ package log
 
 import (
 	"fmt"
-	"octopus/utils"
+	"github.com/radiation-octopus/octopus/utils"
 	"os"
 	"time"
 )

@@ -1,7 +1,7 @@
 package director
 
 import (
-	"octopus/core"
+	"github.com/radiation-octopus/octopus/core"
 	"reflect"
 	"strings"
 )
