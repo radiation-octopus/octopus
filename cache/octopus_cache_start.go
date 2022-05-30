@@ -1,6 +1,6 @@
 package cache
 
-import "octopus/log"
+import "github.com/radiation-octopus/octopus/log"
 
 //Cache启动方法
 type CacheStart struct {

@@ -1,6 +1,6 @@
 package udp
 
-import "octopus/log"
+import "github.com/radiation-octopus/octopus/log"
 
 //Udp启动方法
 type UdpStart struct {

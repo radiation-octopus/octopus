@@ -3,9 +3,9 @@ package udp
 import (
 	"fmt"
 	"net"
-	"octopus/core"
-	"octopus/log"
-	"octopus/utils"
+	"github.com/radiation-octopus/octopus/core"
+	"github.com/radiation-octopus/octopus/log"
+	"github.com/radiation-octopus/octopus/utils"
 	"strconv"
 	"strings"
 	"time"

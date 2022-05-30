@@ -1,7 +1,7 @@
 package api
 
 import (
-	"octopus/director"
+	"github.com/radiation-octopus/octopus/director"
 	"reflect"
 	"strconv"
 	"strings"

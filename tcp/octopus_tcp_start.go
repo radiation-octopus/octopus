@@ -1,6 +1,6 @@
 package tcp
 
-import "octopus/log"
+import "github.com/radiation-octopus/octopus/log"
 
 //Tcp启动方法
 type TcpStart struct {

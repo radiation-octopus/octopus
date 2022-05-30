@@ -1,8 +1,8 @@
 package director
 
 import (
-	"octopus/core"
-	"octopus/utils"
+	"github.com/radiation-octopus/octopus/core"
+	"github.com/radiation-octopus/octopus/utils"
 	"sync"
 )
 

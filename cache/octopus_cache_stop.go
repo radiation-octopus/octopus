@@ -1,6 +1,6 @@
 package cache
 
-import "octopus/log"
+import "github.com/radiation-octopus/octopus/log"
 
 //Cache停止方法
 type CacheStop struct {

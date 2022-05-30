@@ -1,7 +1,7 @@
 package udp
 
 import (
-	"octopus/log"
+	"github.com/radiation-octopus/octopus/log"
 )
 
 //Udp停止方法

@@ -1,7 +1,7 @@
 package api
 
 import (
-	"octopus/log"
+	"github.com/radiation-octopus/octopus/log"
 )
 
 //WebStart

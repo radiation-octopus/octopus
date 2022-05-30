@@ -1,6 +1,6 @@
 package db
 
-import "octopus/log"
+import "github.com/radiation-octopus/octopus/log"
 
 //Db停止方法
 type DbStop struct {

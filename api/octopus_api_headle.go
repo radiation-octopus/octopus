@@ -2,7 +2,7 @@ package api
 
 import (
 	"net/http"
-	"octopus/utils"
+	"github.com/radiation-octopus/octopus/utils"
 )
 
 type OctopusApiHandle struct {
