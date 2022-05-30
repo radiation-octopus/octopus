@@ -11,7 +11,7 @@ type Prque struct {
 }
 
 // 新建创建新的优先级队列。
-func New(setIndex SetIndexCallback) *Prque {
+func NewPrque(setIndex SetIndexCallback) *Prque {
 	return &Prque{newSstack(setIndex, false)}
 }
 
@@ -62,7 +62,7 @@ func (p *Prque) Size() int {
 
 // 清除优先级队列的内容。
 func (p *Prque) Reset() {
-	*p = *New(p.cont.setIndex)
+	*p = *NewPrque(p.cont.setIndex)
 }
 
 /**
