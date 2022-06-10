@@ -32,6 +32,7 @@ octopus:
         struct: p2p.P2pCallTcpServer
 
   api:
+    port: 9000
     session:
       is: true
       maxAge: 1800
@@ -89,21 +90,29 @@ octopus:
         is: true
         num: 1
 
-  #  链初始配置
-  blockchain:
-    binding:
-      #创世区块配置
-      genesis:
-        header:
-          parentHash: "0x0000000000000000000000000000000000000000000000000000000000000000"
-          uncleHash: "0x0000000000000000000000000000000000000000000000000000000000000000"
-          root: "0x0000000000000000000000000000000000000000000000000000000000000000"
-          txhash: "0x0000000000000000000000000000000000000000000000000000000000000000"
-          receiptHash: "0x0000000000000000000000000000000000000000000000000000000000000000"
-          difficulty: "0x00002"
-          number: "0x0"
-          gasLimit: "0x47b760"
-          gasUsed: "0x0"
-          time: "0x5ddf8f3e"
-          nonce: "0x0"
-          #txLookupLimit: 0
+  gorm:
+    dirver: mysql
+    host: 127.0.0.1
+    port: 3306
+    database: octopus_web
+    username: root
+    password: "123456"
+    charset: utf8
+    pool:
+      active: 10
+      max: 20
+
+  console:
+    confirm:
+      is: true
+      confirm: "y"
+      cancel: "n"
+    use:
+      help:
+        is: true
+      exit:
+        is: true
+      back:
+        is: true
+    path:
+      all: \$

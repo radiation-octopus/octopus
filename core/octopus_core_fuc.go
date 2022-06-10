@@ -66,3 +66,11 @@ func CallStopByName(name string) {
 func CallMethod(name string, methodName string, in ...interface{}) []interface{} {
 	return getInstance().CallMethod(name, methodName, in)
 }
+
+func GetLangFuncType(langName string, funName string) string {
+	return getInstance().GetLangFuncType(langName, funName)
+}
+
+func GetLangName(lang interface{}) string {
+	return getInstance().GetLangName(lang)
+}

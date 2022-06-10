@@ -73,11 +73,11 @@ func (c *OctopusCore) dependenceInject() {
 		stopMethod := valueOf.MethodByName(stopMethodName)
 		//启动器
 		if startMethod.String() != "<invalid Value>" {
-			c.startOctopusLang[typeOf.String()] = autoRelyonLangs
+			c.startOctopusLang[strings.TrimPrefix(typeOf.String(), "*")] = autoRelyonLangs
 			//startMethod.Call(nil)
 			//停止器
 		} else if stopMethod.String() != "<invalid Value>" {
-			c.stopOctopusLang[typeOf.String()] = autoRelyonLangs
+			c.stopOctopusLang[strings.TrimPrefix(typeOf.String(), "*")] = autoRelyonLangs
 			//stopMethod.Call(nil)
 		}
 	}
@@ -120,7 +120,7 @@ func (c *OctopusCore) longsByStopMethod() map[string][]string {
 
 func (c *OctopusCore) CallMethod(name string, methodName string, in []interface{}) []interface{} {
 	outInterface := []interface{}{}
-	octopusLang := c.OctopusLang[name]
+	octopusLang := c.OctopusLang["*"+name]
 	valueOf := reflect.ValueOf(*octopusLang)
 	//fmt.Println("valueOf====> ", valueOf)
 	method := valueOf.MethodByName(methodName)
@@ -129,18 +129,31 @@ func (c *OctopusCore) CallMethod(name string, methodName string, in []interface{
 		//fmt.Println(method)
 	} else {
 		values := make([]reflect.Value, len(in))
-		for i := range in {
-			val := in[i]
+		for i, val := range in {
 			value := reflect.ValueOf(val)
 			//fmt.Println("value====> ", value)
 			values[i] = value
 		}
-
 		callValues := method.Call(values)
-		for i, c := range callValues {
-			outInterface[i] = c.Interface()
+		for _, c := range callValues {
+			outInterface = append(outInterface, c.Interface())
 		}
 		//fmt.Println(method)
 	}
 	return outInterface
+}
+
+func (c *OctopusCore) GetLangFuncType(langName string, funName string) string {
+	key := "*" + langName
+	attribute := c.OctopusLang[key]
+	return reflect.ValueOf(*attribute).MethodByName(funName).String()
+}
+
+func (c *OctopusCore) GetLangName(lang interface{}) string {
+	name := reflect.TypeOf(lang).String()
+	if c.OctopusLang[name] != nil {
+		return strings.Split(name, "*")[1]
+	} else {
+		return ""
+	}
 }

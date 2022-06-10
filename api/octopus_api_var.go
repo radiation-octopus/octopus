@@ -1,6 +1,8 @@
 package api
 
 //存放默认常量
+//是否开启session
+var Port = 8080
 
 //是否开启session
 var IsSession bool

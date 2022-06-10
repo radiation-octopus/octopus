@@ -31,7 +31,7 @@ func initProcess(writer http.ResponseWriter, request *http.Request) *OctopusApiP
 	apiProcess.Request = request
 	requestURI := request.RequestURI
 	uri := strings.Split(requestURI, "?")
-	path := strings.Split(uri[0], "/")
+	path := strings.Split(uri[0], "/")[1:]
 	apiProcess.Binding, apiProcess.InMap = getInstance().getBindingAndParam(path, request.Method, apiProcess.InMap)
 	if len(uri) == 2 {
 		param := strings.Split(uri[1], "&")
@@ -182,10 +182,13 @@ func (a *OctopusApiProcess) setParam() {
 		//返回值
 		field.Close()
 	}
-	//响应码
-	a.Writer.WriteHeader(200)
+	//a.Request.Response.Write(j)
+	//a.Writer.Header().Set("Content-type", "application/text")
+	//result 数据
 	j, _ := json.Marshal(ResultSuccess(a.OutMap))
 	a.Writer.Write(j)
+	//响应码
+	//a.Writer.WriteHeader(200)
 }
 
 //清理值
@@ -213,8 +216,8 @@ func (a *OctopusApiProcess) executeProcess() {
 	a.Binding.Mutex.Lock()
 	a.getParam()
 	a.callMethod()
-	a.cleanParam()
 	a.setParam()
+	//fmt.Println(&a.Writer)
 	a.cleanParam()
 	a.Binding.Mutex.Unlock()
 }

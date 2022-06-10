@@ -6,6 +6,7 @@ import (
 
 //WebStart
 type WebStart struct {
+	Port                int    `autoInjectCfg:"octopus.api.port"`
 	IsSession           bool   `autoInjectCfg:"octopus.api.session.is"`
 	SessionMaxAge       int    `autoInjectCfg:"octopus.api.session.maxAge"`
 	SessionCookiePath   string `autoInjectCfg:"octopus.api.session.cookie.path"`
@@ -20,6 +21,7 @@ type WebStart struct {
 }
 
 func (w *WebStart) Start() {
+	Port = w.Port
 	IsSession = w.IsSession
 	SessionMaxAge = w.SessionMaxAge
 	SessionCookiePath = w.SessionCookiePath

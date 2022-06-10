@@ -10,6 +10,7 @@ import (
 )
 
 type OctopusApi struct {
+	AddBaseApiChan    chan BaseApi           //BaseApi通道
 	RouteMap          map[string]interface{} //路径map
 	StructNameMutex   map[string]*sync.Mutex //结构体锁
 	ApiHandle         *OctopusApiHandle      //api回调
@@ -26,42 +27,61 @@ func (a *OctopusApi) start() {
 	}
 	//初始化ApiHandle
 	a.ApiHandle = initHandle()
+	//处理BaseApi通道
+	a.dealBaseApiChan()
 }
 
 //启动stop
 func (a *OctopusApi) stop() {
 }
 
-func (a *OctopusApi) AddApi(baseApis ...BaseApi) {
+//添加协程到api
+func (a *OctopusApi) addApi(baseApis []BaseApi) {
 	for _, api := range baseApis {
-		a.StructNameMutex[reflect.TypeOf(&api).String()] = &sync.Mutex{}
-		//绑定路由
-		api.Binding()
-		//注入到启动器中
-		director.Register(a)
+		if a.AddBaseApiChan == nil {
+			a.AddBaseApiChan = make(chan BaseApi, 1024)
+		}
+		a.AddBaseApiChan <- api
 	}
+}
+
+//处理协程到api
+func (a *OctopusApi) dealBaseApiChan() {
+	go func() {
+		select {
+		case api := <-a.AddBaseApiChan:
+			lockname := reflect.TypeOf(api).String()
+			a.StructNameMutex[lockname] = &sync.Mutex{}
+			//绑定路由
+			api.CallBindingApi()
+			//注入到启动器中
+			director.Register(api)
+		}
+	}()
 }
 
 func (a *OctopusApi) getMutex(baseApi BaseApi) *sync.Mutex {
-	return a.StructNameMutex[reflect.TypeOf(&baseApi).String()]
+	return a.StructNameMutex[reflect.TypeOf(baseApi).String()]
 }
 
-func (a *OctopusApi) BindingApI(
+func (a *OctopusApi) bindingApi(
 	baseApi BaseApi,
 	f func(map[string]interface{}) map[string]interface{},
 	requestMethod string,
-	path ...string) {
+	path []string) {
 	//获取binding参数
 	binding := initApiBinding(baseApi, f)
-	typeOfElem := reflect.TypeOf(&baseApi).Elem()
+	typeOfElem := reflect.TypeOf(baseApi).Elem()
 	var baseUrl string
-	for i := 0; i < typeOfElem.NumField(); i++ {
-		tag := typeOfElem.Field(i).Tag
-		if tag.Get(BaseUrlTag) != "" {
-			baseUrl = tag.Get(BaseUrlTag)
+	if typeOfElem.NumField() != 0 {
+		for i := 0; i < typeOfElem.NumField(); i++ {
+			tag := typeOfElem.Field(i).Tag
+			if tag.Get(BaseUrlTag) != "" {
+				baseUrl = tag.Get(BaseUrlTag)
+			}
 		}
 	}
-	basepath := strings.Split(baseUrl, "/")
+	basepath := strings.Split(baseUrl, "/")[:0]
 	var allpath []string
 	allpath = basepath
 	for _, p := range path {
@@ -148,7 +168,7 @@ func (a *OctopusApi) getBindingAndParam(path []string, requestMethod string, par
 			value := routeMap[p]
 			if i+1 == len(path) {
 				routeMap = value.(map[string]interface{})
-				value = routeMap[requestMethod]
+				value = routeMap[RouteMapMethodPrefix+requestMethod]
 				return value.(*OctopusApiBinding), param
 			} else if strings.Contains(reflect.TypeOf(value).String(), "map") {
 				routeMap = value.(map[string]interface{})

@@ -90,3 +90,7 @@ func TestTree(t *testing.T) {
 	fmt.Println(director.FindDeepOrders(mapVar))
 	fmt.Println(director.FindHeadOrders(mapVar))
 }
+
+//func TestApiHeadle(t *testing.T) {
+//	api.InitHandle()
+//}

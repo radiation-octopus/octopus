@@ -44,10 +44,6 @@ func (d *OctopusDirector) directorStart() {
 	for i := range d.startOctopusLangOrder {
 		core.CallStartByName(d.startOctopusLangOrder[i])
 	}
-
-	for true {
-
-	}
 }
 
 //core停止操作
